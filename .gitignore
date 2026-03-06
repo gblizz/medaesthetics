@@ -36,3 +36,19 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Environment files (NEVER commit secrets)
+.env
+.env.local
+.env.*.local
+
+# Prisma
+packages/db/prisma/*.db
+
+# Build outputs
+dist/
+.next/
+out/
+
+# Turbo
+.turbo/
