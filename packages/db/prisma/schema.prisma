@@ -91,7 +91,12 @@ model Practice {
   name        String
   slug        String   @unique
   logoUrl     String?
-  primaryColor String?  @default("#6366f1")
+  primaryColor   String?  @default("#6366f1")
+  secondaryColor String?
+  accentColor    String?
+  titleFont      String?  @default("Cormorant Garamond")
+  headerFont     String?  @default("Montserrat")
+  bodyFont       String?  @default("Inter")
   phone       String?
   email       String?
   website     String?

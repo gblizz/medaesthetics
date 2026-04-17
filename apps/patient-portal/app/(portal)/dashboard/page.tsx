@@ -14,31 +14,57 @@ export default function PatientDashboardPage() {
   const appointments = appointmentsData ?? [];
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">Welcome Back</h1>
+    <div className="space-y-12">
+      {/* Page header */}
+      <div className="border-b border-gray-100 pb-8">
+        <p className="mb-2 text-[11px] tracking-[0.25em] uppercase text-gray-400">
+          Patient Portal
+        </p>
+        <h1 className="font-serif text-5xl font-light text-gray-900">
+          Welcome Back
+        </h1>
+      </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-6">
-        <h2 className="mb-4 text-base font-semibold text-gray-900">Upcoming Appointments</h2>
+      {/* Upcoming appointments */}
+      <section>
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-[11px] tracking-[0.2em] uppercase text-gray-500">
+            Upcoming Appointments
+          </h2>
+          <a
+            href="/book"
+            className="border-b border-gray-900 pb-px text-[11px] tracking-[0.15em] uppercase text-gray-900 transition-colors hover:border-gray-400 hover:text-gray-400"
+          >
+            Schedule New
+          </a>
+        </div>
+
         {appointments.length === 0 ? (
-          <div className="text-center">
-            <p className="text-sm text-gray-500">No upcoming appointments</p>
+          <div className="rounded-sm border border-stone-100 bg-stone-50 px-10 py-16 text-center">
+            <p className="font-serif text-3xl font-light text-gray-400">
+              No upcoming visits
+            </p>
+            <p className="mt-3 text-sm text-gray-400">
+              You have no appointments scheduled at this time.
+            </p>
             <a
               href="/book"
-              className="mt-3 inline-block rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+              style={{ color: "#ffffff" }}
+              className="mt-8 inline-block bg-black px-10 py-3.5 text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-gray-800"
             >
-              Book Now
+              Schedule a Visit
             </a>
           </div>
         ) : (
-          <ul className="space-y-3">
+          <div className="divide-y divide-gray-100 border border-gray-100">
             {appointments.map((appt) => (
-              <li
+              <div
                 key={appt.id}
-                className="flex items-center justify-between rounded-lg border border-gray-100 p-4"
+                className="flex items-center justify-between bg-white px-6 py-5 transition-colors hover:bg-stone-50"
               >
                 <div>
                   <p className="font-medium text-gray-900">{appt.service.name}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-gray-400">
                     {new Date(appt.startsAt).toLocaleString("en-US", {
                       weekday: "long",
                       month: "long",
@@ -49,19 +75,44 @@ export default function PatientDashboardPage() {
                   </p>
                 </div>
                 <span
-                  className={`rounded-full px-3 py-1 text-xs font-medium ${
+                  className={`text-[10px] tracking-[0.15em] uppercase px-3 py-1.5 ${
                     appt.status === "CONFIRMED"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-blue-100 text-blue-700"
+                      ? "bg-stone-100 text-stone-600"
+                      : "bg-gray-50 text-gray-500"
                   }`}
                 >
                   {appt.status}
                 </span>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
-      </div>
+      </section>
+
+      {/* Quick links */}
+      <section>
+        <h2 className="mb-6 text-[11px] tracking-[0.2em] uppercase text-gray-500">
+          Quick Access
+        </h2>
+        <div className="grid grid-cols-1 gap-px bg-gray-100 border border-gray-100 sm:grid-cols-3">
+          {[
+            { href: "/book", label: "Book a Visit", sub: "Schedule your next appointment" },
+            { href: "/records", label: "My Records", sub: "View your treatment history" },
+            { href: "/invoices", label: "Invoices", sub: "Review and pay your balance" },
+          ].map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="group bg-white px-8 py-8 transition-colors hover:bg-stone-50"
+            >
+              <p className="font-serif text-xl font-light text-gray-900 group-hover:text-gray-700">
+                {item.label}
+              </p>
+              <p className="mt-1 text-xs text-gray-400">{item.sub}</p>
+            </a>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
