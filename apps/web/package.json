@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.0.0",
+    "@repo/ai": "*",
     "@repo/api": "*",
     "@repo/auth": "*",
     "@repo/config": "*",
